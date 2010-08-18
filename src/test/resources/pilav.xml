@@ -1,0 +1,8 @@
+<recipe name="Pilav">
+		<meat name="Chicken" amount="500 gr"/>
+		<vegetable name="Red Sweet pepper" amount="1"/>
+		<vegetable name="Green Sweet pepper" amount="1"/>
+		<vegetable name="Onion" amount="1"/>
+		<grocery name="Can of peaches" amount="1"/>
+		<grocery name="Tomatosauce" amount="1"/>
+</recipe>

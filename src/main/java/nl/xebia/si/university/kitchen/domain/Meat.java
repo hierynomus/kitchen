@@ -1,5 +1,11 @@
 package nl.xebia.si.university.kitchen.domain;
 
-public class Meat implements Ingredient {
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+@XStreamAlias("meat")
+public class Meat extends Ingredient {
+
+	public Meat(final String name) {
+		super(name);
+	}
 }
