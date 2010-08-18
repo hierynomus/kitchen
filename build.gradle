@@ -1,0 +1,23 @@
+defaultTasks 'build'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenRepo urls: "file://" + System.getProperty('user.home') + "/.m2/repository/"
+	mavenCentral()
+	mavenRepo urls: "http://repository.springsource.com/maven/bundles/milestone"
+	mavenRepo urls: "http://repository.springsource.com/maven/bundles/release"
+	mavenRepo urls: "http://repository.springsource.com/maven/bundles/external"
+}
+
+sourceCompatibility = 1.6
+
+springIntegrationVersion='2.0.0.M5'
+
+dependencies {
+	compile "org.springframework.integration:org.springframework.integration:${springIntegrationVersion}"
+    compile "com.google.collections:google-collections:1.0"
+	testCompile "junit:junit:4.8.1"
+
+}
