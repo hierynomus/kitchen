@@ -24,4 +24,8 @@ public class Ingredient {
 		this.amount = amount;
 		this.type = type;
 	}
+
+	public boolean isSatisfiedBy(MealIngredient mealIngredient) {
+		return mealIngredient.satisfies(name, amount, type);
+	}
 }

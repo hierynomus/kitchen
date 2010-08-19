@@ -10,4 +10,11 @@ public abstract class MealIngredient {
 		this.name = name;
 		this.amount = amount;
 	}
+
+	public boolean satisfies(String name, Amount amount, Ingredient.Type type) {
+		return this.name.equals(name)&&this.amount.equals(amount)&&hasType(type);
+
+	}
+
+	protected abstract boolean hasType(Ingredient.Type type);
 }

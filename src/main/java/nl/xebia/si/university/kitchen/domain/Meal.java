@@ -20,8 +20,11 @@ public class Meal {
 		ingredients.add(ingredient);
 	}
 
-	public void isDone() {
-		// When All Ingredients from the Recipe are in the Meal.
+	/**
+	 * @return true when All Ingredients from the Recipe are in the Meal
+	 */
+	public boolean isDone() {
+		return recipe.isSatisfiedBy(ingredients);
 	}
 
 	public Recipe getRecipe() {

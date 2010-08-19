@@ -45,6 +45,14 @@ public class ApplicationFlowTests {
 		assertThat(mealMessage.getPayload(), is(Meal.class));
 	}
 
+	@Test
+	public void recipeMessageShouldResultInDoneMeal() {
+		recipes.send(recipeMessage());
+
+		Meal meal = (Meal) meals.receive().getPayload();
+		assertThat(meal.isDone(), is(true));
+	}
+
 	private Message<?> recipeMessage() {
 		return MessageBuilder.withPayload(new Recipe("foo")).build();
 	}
