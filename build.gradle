@@ -13,7 +13,7 @@ repositories {
 
 sourceCompatibility = 1.6
 
-springIntegrationVersion = '2.0.0.M5'
+springIntegrationVersion = '2.0.0.M6'
 springVersion = '3.0.3.RELEASE'
 
 dependencies {
