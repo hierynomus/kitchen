@@ -14,12 +14,16 @@
 		</i:header-enricher>
 	</i:chain>
 	<!-- replace with splitter here -->
-	<i:bridge input-channel="recipes" output-channel="ingredients"/>
+	<i:bridge id="recipesToIngredients" input-channel="recipes" output-channel="ingredients"/>
 
 	<i:channel id="ingredients"/>
 
 	<!-- replace with shopping-flow.xml -->
-	<i:bridge input-channel="ingredients" output-channel="products"/>
+	<i:bridge id="ingredientsToShops" input-channel="ingredients" output-channel="grocerybags"/>
+
+	<i:channel id="grocerybags"/>
+
+	<i:bridge id="grocerybagUnpacker" input-channel="grocerybags" output-channel="products"/>
 
 	<i:channel id="products"/>
 
