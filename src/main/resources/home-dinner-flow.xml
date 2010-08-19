@@ -8,6 +8,11 @@
        ">
 	<i:channel id="recipes"/>
 
+	<i:chain input-channel="recipes" output-channel="ingredients">
+		<i:header-enricher>
+			<i:header name="recipe" expression="payload"/>
+		</i:header-enricher>
+	</i:chain>
 	<!-- replace with splitter here -->
 	<i:bridge input-channel="recipes" output-channel="ingredients"/>
 
@@ -18,7 +23,7 @@
 
 	<i:channel id="products"/>
 
-  <import resource="kitchen.xml"/>
+	<import resource="kitchen.xml"/>
 
 	<i:channel id="meals">
 		<i:queue capacity="50"/>

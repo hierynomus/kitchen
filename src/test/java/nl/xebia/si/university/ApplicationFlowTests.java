@@ -1,14 +1,13 @@
 package nl.xebia.si.university;
 
-import nl.xebia.si.university.kitchen.domain.Meal;
-import nl.xebia.si.university.kitchen.domain.Recipe;
+import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.integration.channel.PollableChannel;
-import org.springframework.integration.core.Message;
+import org.springframework.integration.Message;
+import org.springframework.integration.core.MessageBuilder;
 import org.springframework.integration.core.MessageChannel;
-import org.springframework.integration.message.MessageBuilder;
+import org.springframework.integration.core.PollableChannel;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,12 +19,17 @@ import static org.junit.Assert.assertThat;
  * @author Iwein Fuld
  */
 
-@ContextConfiguration(locations="/home-dinner-flow.xml")
+@ContextConfiguration(locations = "/home-dinner-flow.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ApplicationFlowTests {
 
+	private final Recipe recipe = friedEggRecipe();
+
 	@Autowired
 	MessageChannel recipes;
+
+	@Autowired
+	MessageChannel products;
 
 	@Autowired
 	PollableChannel meals;
@@ -37,24 +41,55 @@ public class ApplicationFlowTests {
 
 	@Test
 	public void recipeMessageShouldResultInMealOutput() {
-		recipes.send(recipeMessage());
+		recipes.send(friedEggRecipeMessage());
 
 		//in the end a meal should come out
-		Message<?> mealMessage = meals.receive();
+		Message<?> mealMessage = meals.receive(2000);
 		assertThat(mealMessage, is(notNullValue()));
 		assertThat(mealMessage.getPayload(), is(Meal.class));
 	}
 
 	@Test
-	public void recipeMessageShouldResultInDoneMeal() {
-		recipes.send(recipeMessage());
+	public void productsShouldResultInDoneMealOutput() {
+		//fake the splitting of the recipe
+		products.send(eggProductMessage());
+		products.send(butterProductMessage());
 
-		Meal meal = (Meal) meals.receive().getPayload();
+		Meal meal = (Meal) meals.receive(2000).getPayload();
 		assertThat(meal.isDone(), is(true));
 	}
 
-	private Message<?> recipeMessage() {
-		return MessageBuilder.withPayload(new Recipe("foo")).build();
+	private Message<?> butterProductMessage() {
+		return MessageBuilder
+				.withPayload(new Grocery("butter", new Amount(20, Amount.Unit.GRAMS)))
+				.setHeader("recipe", recipe)
+				.build();
+	}
+
+	private Message<?> eggProductMessage() {
+		return MessageBuilder
+				.withPayload(new Grocery("egg", new Amount(1, Amount.Unit.PIECES)))
+				.setHeader("recipe", recipe)
+				.build();
+	}
+
+	@Test
+	public void recipeMessageShouldResultInDoneMeal() {
+		recipes.send(friedEggRecipeMessage());
+
+		Meal meal = (Meal) meals.receive(2000).getPayload();
+		assertThat(meal.isDone(), is(true));
+	}
+
+	private Message<?> friedEggRecipeMessage() {
+		return MessageBuilder.withPayload(recipe).build();
+	}
+
+	private Recipe friedEggRecipe() {
+		Recipe recipe = new Recipe("fried egg");
+		recipe.addIngredient(new Ingredient("egg", new Amount(1, Amount.Unit.PIECES), Ingredient.Type.Grocery));
+		recipe.addIngredient(new Ingredient("butter", new Amount(20, Amount.Unit.GRAMS), Ingredient.Type.Grocery));
+		return recipe;
 	}
 
 }

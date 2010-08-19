@@ -1,10 +1,19 @@
 package nl.xebia.si.university.kitchen;
 
-import nl.xebia.si.university.kitchen.domain.Recipe;
+import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Test;
+import org.springframework.beans.DirectFieldAccessor;
+import org.springframework.integration.Message;
+import org.springframework.integration.core.MessageBuilder;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author Iwein Fuld
@@ -12,10 +21,28 @@ import static org.junit.Assert.assertThat;
 public class CookTest {
 
 	private final Cook cook = new Cook();
+	private Recipe recipe = new Recipe("grub");
 
 	@Test
 	public void shouldPrepareMeal() throws Exception {
-		Recipe recipe = new Recipe("grub");
-		assertThat( cook.prepareMeal(recipe).getRecipe(), is(recipe));
+		List<Message<Product>> messages =
+				Collections.<Message<Product>>singletonList(
+						wrapInMessage(mock(Product.class)));
+		assertThat(cook.prepareMeal(messages).getRecipe(), is(recipe));
+	}
+
+	@Test
+	public void shouldCookAllProducts() {
+		Grocery grocery = mock(Grocery.class);
+		Meat meat = mock(Meat.class);
+		List<Message<Product>> products = Arrays.asList(wrapInMessage(grocery), wrapInMessage(meat));
+
+		Meal meal = cook.prepareMeal(products);
+		DirectFieldAccessor accessor = new DirectFieldAccessor(meal);
+		assertThat((List<Product>)accessor.getPropertyValue("products"), hasItems(grocery, meat));
+	}
+
+	private Message<Product> wrapInMessage(Product grocery) {
+		return MessageBuilder.withPayload(grocery).setHeader("recipe", recipe).build();
 	}
 }

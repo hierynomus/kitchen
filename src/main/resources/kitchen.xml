@@ -10,5 +10,9 @@
 
 	<bean id="cook" class="nl.xebia.si.university.kitchen.Cook"/>
 
-	<i:service-activator id="meal-prep" input-channel="products" output-channel="meals" ref="cook" method="prepareMeal"/>
+	<i:aggregator input-channel="products" output-channel="meals" ref="cook"
+								method="prepareMeal"
+								correlation-strategy="cook" correlation-strategy-method="correlatingRecipeFor"
+								release-strategy="cook" 
+		/>
 </beans>
