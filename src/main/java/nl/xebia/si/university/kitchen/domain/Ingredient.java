@@ -8,7 +8,9 @@ import nl.xebia.si.university.kitchen.domain.support.AmountConverter;
 @XStreamAlias("ingredient")
 public class Ingredient {
 
-	public enum Type { Meat, Vegetable, Grocery };
+	public enum Type {
+		Meat, Vegetable, Grocery
+	}
 
 	@XStreamAsAttribute
 	private String name;
