@@ -6,27 +6,10 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
-	<import resource="recipebook.xml"/>
 
-	<i:channel id="recipes"/>
+	<i:bridge id="ingredients-to-shops" input-channel="ingredients" output-channel="test"/>
 
-	<import resource="splitRecipes.xml"/>
-
-	<i:channel id="ingredients"/>
-
-	<!-- replace with shopping-flow.xml -->
-	<i:bridge id="ingredients-to-shops" input-channel="ingredients" output-channel="grocerybags"/>
-
-	<i:channel id="grocerybags"/>
-
-	<i:bridge id="grocerybagUnpacker" input-channel="grocerybags" output-channel="products"/>
-
-	<i:channel id="products"/>
-
-	<import resource="kitchen.xml"/>
-
-	<i:channel id="meals">
+	<i:channel id="test">
 		<i:queue capacity="50"/>
 	</i:channel>
-
 </beans>

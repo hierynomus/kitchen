@@ -1,5 +1,6 @@
 package nl.xebia.si.university;
 
+import nl.xebia.si.university.kitchen.RecipeObjectMother;
 import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ApplicationFlowTests {
 
-	private final Recipe recipe = friedEggRecipe();
+	private final Recipe recipe = RecipeObjectMother.friedEggRecipe();
 
 	@Autowired
 	MessageChannel recipes;
@@ -90,13 +91,6 @@ public class ApplicationFlowTests {
 
 	private Message<?> friedEggRecipeMessage() {
 		return MessageBuilder.withPayload(recipe).build();
-	}
-
-	private Recipe friedEggRecipe() {
-		Recipe recipe = new Recipe("fried egg");
-		recipe.addIngredient(new Ingredient("egg", new Amount(1, Amount.Unit.PIECES), Ingredient.Type.Grocery));
-		recipe.addIngredient(new Ingredient("butter", new Amount(20, Amount.Unit.GRAMS), Ingredient.Type.Grocery));
-		return recipe;
 	}
 
 }
