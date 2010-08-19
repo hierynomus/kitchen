@@ -26,3 +26,7 @@ dependencies {
 	testCompile "org.springframework:spring-test:${springVersion}"
 	testCompile "junit:junit:4.8.1"
 }
+
+task wrapper(type: Wrapper) { 
+	  gradleVersion = '0.9-rc-1' 
+}
