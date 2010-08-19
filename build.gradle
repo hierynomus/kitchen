@@ -7,14 +7,15 @@ apply plugin: 'idea'
 repositories {
 	mavenRepo urls: "file://" + System.getProperty('user.home') + "/.m2/repository/"
 	mavenCentral()
+	mavenRepo urls: "http://s3.amazonaws.com/maven.springframework.org/snapshot"
 	mavenRepo urls: "http://s3.amazonaws.com/maven.springframework.org/milestone"
 	mavenRepo urls: "http://s3.amazonaws.com/maven.springframework.org/release"
 }
 
 sourceCompatibility = 1.6
 
-springIntegrationVersion = '2.0.0.M6'
-springVersion = '3.0.3.RELEASE'
+springIntegrationVersion = '2.0.0.BUILD-SNAPSHOT'
+springVersion = '3.0.4.BUILD-SNAPSHOT'
 
 dependencies {
 	compile "org.springframework.integration:spring-integration-core:${springIntegrationVersion}"
