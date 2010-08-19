@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<i:bridge id="ingredients-to-shops" input-channel="ingredients" output-channel="test"/>
+	<i:bridge id="ingredientsToShops" input-channel="ingredients" output-channel="test"/>
 
 	<i:channel id="test">
 		<i:queue capacity="50"/>

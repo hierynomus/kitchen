@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:i="http://www.springframework.org/schema/integration"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+       ">
+
+	<i:chain id="ingredientsToShops" input-channel="ingredients">
+		<i:router expression="payload.type">
+			<i:mapping value="Meat" channel="meat"/>
+			<i:mapping value="Vegetable" channel="vegetables"/>
+			<i:mapping value="Grocery" channel="groceries"/>
+		</i:router>
+	</i:chain>
+
+	<i:transformer input-channel="meat" ref="butcher" output-channel="grocerybags"/>
+	<i:transformer input-channel="groceries" ref="supermarket" output-channel="grocerybags"/>
+	<i:transformer input-channel="vegetables" ref="green-grocer" output-channel="grocerybags"/>
+
+	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>
+	<bean id="supermarket" class="nl.xebia.si.university.kitchen.shop.Supermarket"/>
+	<bean id="green-grocer" class="nl.xebia.si.university.kitchen.shop.GreenGrocer"/>
+</beans>

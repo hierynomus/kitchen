@@ -1,8 +1,10 @@
 package nl.xebia.si.university;
 
 import nl.xebia.si.university.kitchen.RecipeObjectMother;
-import nl.xebia.si.university.kitchen.domain.*;
-import org.junit.Ignore;
+import nl.xebia.si.university.kitchen.domain.Amount;
+import nl.xebia.si.university.kitchen.domain.Grocery;
+import nl.xebia.si.university.kitchen.domain.Meal;
+import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +80,7 @@ public class ApplicationFlowTests {
 	//== True end to end methods ==//
 
 	@Test
-	@Ignore //until we're done
+//	@Ignore //until we're done
 	public void recipeMessageShouldResultInDoneMeal() {
 		recipes.send(friedEggRecipeMessage());
 

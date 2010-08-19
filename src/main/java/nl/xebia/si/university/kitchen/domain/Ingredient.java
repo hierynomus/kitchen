@@ -3,7 +3,6 @@ package nl.xebia.si.university.kitchen.domain;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import nl.xebia.si.university.kitchen.support.AmountConverter;
 
 @XStreamAlias("ingredient")
 public class Ingredient {
@@ -29,5 +28,17 @@ public class Ingredient {
 
 	public boolean isSatisfiedBy(Product product) {
 		return product.satisfies(name, amount, type);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Amount getAmount() {
+		return amount;
+	}
+
+	public Type getType() {
+		return type;
 	}
 }

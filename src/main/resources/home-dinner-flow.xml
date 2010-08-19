@@ -10,12 +10,11 @@
 
 	<i:channel id="recipes"/>
 
-	<import resource="splitRecipes.xml"/>
+	<import resource="split-recipe-flow.xml"/>
 
 	<i:channel id="ingredients"/>
 
-	<!-- replace with shopping-flow.xml -->
-	<i:bridge id="ingredients-to-shops" input-channel="ingredients" output-channel="grocerybags"/>
+	<import resource="shopping-flow.xml"/>
 
 	<i:channel id="grocerybags"/>
 
@@ -29,4 +28,7 @@
 		<i:queue capacity="50"/>
 	</i:channel>
 
+	<i:poller default="true">
+		<i:interval-trigger interval="1000"/>
+	</i:poller>
 </beans>
