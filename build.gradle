@@ -33,3 +33,8 @@ dependencies {
 task wrapper(type: Wrapper) {
 	  gradleVersion = '0.9-rc-1' 
 }
+
+ideaModule {
+	javaVersion = '1.6'
+}
+
