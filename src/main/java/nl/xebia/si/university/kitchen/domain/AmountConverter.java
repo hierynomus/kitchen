@@ -1,4 +1,4 @@
-package nl.xebia.si.university.kitchen.support;
+package nl.xebia.si.university.kitchen.domain;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
