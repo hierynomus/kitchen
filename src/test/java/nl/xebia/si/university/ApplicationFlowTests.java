@@ -1,5 +1,6 @@
 package nl.xebia.si.university;
 
+import nl.xebia.si.university.kitchen.domain.Meal;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,11 @@ public class ApplicationFlowTests {
 	@Test
 	public void recipeMessageShouldResultInMealOutput() {
 		recipes.send(recipeMessage());
-		assertThat(meals.receive(), is(notNullValue()));
+
+		//in the end a meal should come out
+		Message<?> mealMessage = meals.receive();
+		assertThat(mealMessage, is(notNullValue()));
+		assertThat(mealMessage.getPayload(), is(Meal.class));
 	}
 
 	private Message<?> recipeMessage() {

@@ -6,22 +6,9 @@
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
-	<i:channel id="recipes"/>
+	<!-- this is where the meal gets prepared -->
 
-	<!-- replace with splitter here -->
-	<i:bridge input-channel="recipes" output-channel="ingredients"/>
+	<bean id="cook" class="nl.xebia.si.university.kitchen.Cook"/>
 
-	<i:channel id="ingredients"/>
-
-	<!-- replace with shopping-flow.xml -->
-	<i:bridge input-channel="ingredients" output-channel="products"/>
-
-	<i:channel id="products"/>
-
-  <import resource="kitchen.xml"/>
-
-	<i:channel id="meals">
-		<i:queue capacity="50"/>
-	</i:channel>
-
+	<i:service-activator id="meal-prep" input-channel="products" output-channel="meals" ref="cook" method="prepareMeal"/>
 </beans>

@@ -23,4 +23,8 @@ public class Meal {
 	public void isDone() {
 		// When All Ingredients from the Recipe are in the Meal.
 	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
 }
