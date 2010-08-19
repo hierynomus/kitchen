@@ -28,7 +28,7 @@ public class Recipe {
 		return name;
 	}
 
-	public List<? extends Ingredient> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 

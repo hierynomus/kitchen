@@ -1,17 +1,17 @@
 package com.xebia.si.university.kitchen.domain;
 
 import com.thoughtworks.xstream.XStream;
-import nl.xebia.si.university.kitchen.domain.Grocery;
-import nl.xebia.si.university.kitchen.domain.Meat;
-import nl.xebia.si.university.kitchen.domain.Recipe;
-import nl.xebia.si.university.kitchen.domain.Vegetable;
+import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
-import static org.hamcrest.CoreMatchers.*;
+import static nl.xebia.si.university.kitchen.domain.Amount.Unit;
+import static nl.xebia.si.university.kitchen.domain.Ingredient.Type;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -23,7 +23,7 @@ public class DomainTest {
 	public void init() {
 		xstream = new XStream();
 		xstream.autodetectAnnotations(true);
-		xstream.processAnnotations(new Class[]{Recipe.class, Grocery.class, Meat.class, Vegetable.class});
+		xstream.processAnnotations(new Class[]{Recipe.class, Ingredient.class});
 	}
 
 	@Test
@@ -38,9 +38,9 @@ public class DomainTest {
 	@Test
 	public void shouldMarshallDomain() {
 		Recipe r = new Recipe("Nasi");
-		final Meat i = new Meat("Beef");
+		Ingredient i = new Ingredient("Beef", new Amount(500, Unit.GRAMS), Type.Meat);
 		r.addIngredient(i);
-		r.addIngredient(new Vegetable("Red Sweet Pepper"));
+		r.addIngredient(new Ingredient("Red Sweet Pepper", new Amount(1, Unit.PIECES), Type.Vegetable));
 
 		System.out.println(xstream.toXML(r));
 	}

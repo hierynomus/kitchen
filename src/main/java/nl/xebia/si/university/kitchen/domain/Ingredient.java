@@ -1,15 +1,27 @@
 package nl.xebia.si.university.kitchen.domain;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import nl.xebia.si.university.kitchen.domain.support.AmountConverter;
 
-public abstract class Ingredient {
+@XStreamAlias("ingredient")
+public class Ingredient {
+
+	public enum Type { Meat, Vegetable, Grocery };
 
 	@XStreamAsAttribute
 	private String name;
-	
+
+	@XStreamConverter(AmountConverter.class)
 	private Amount amount;
-	
-	public Ingredient(final String name) {
+
+	@XStreamAsAttribute
+	private Type type;
+
+	public Ingredient(final String name, final Amount amount, final Type type) {
 		this.name = name;
+		this.amount = amount;
+		this.type = type;
 	}
 }
