@@ -1,11 +1,8 @@
 package nl.xebia.si.university;
 
 import nl.xebia.si.university.kitchen.RecipeObjectMother;
-<<<<<<< HEAD
 import nl.xebia.si.university.kitchen.domain.Amount;
 import nl.xebia.si.university.kitchen.domain.Grocery;
-=======
->>>>>>> origin/master
 import nl.xebia.si.university.kitchen.domain.Ingredient;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.junit.Test;
