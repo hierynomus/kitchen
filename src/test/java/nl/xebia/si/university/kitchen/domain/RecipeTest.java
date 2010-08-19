@@ -21,13 +21,13 @@ public class RecipeTest {
 	public void shouldNotBeSatisfiedByEmptyList() throws Exception {
 		Ingredient ingredient = mock(Ingredient.class);
 		recipe.addIngredient(ingredient);
-		assertThat(recipe.isSatisfiedBy(Collections.<MealIngredient>emptyList()), is(false));
+		assertThat(recipe.isSatisfiedBy(Collections.<Product>emptyList()), is(false));
 	}
 	
 	@Test
 	public void shouldBeSatisfiedByCorrectIngredients() throws Exception {
 		Ingredient ingredient = mock(Ingredient.class);
-		MealIngredient product = mock(MealIngredient.class);
+		Product product = mock(Product.class);
 		given(ingredient.isSatisfiedBy(product)).willReturn(true);
 
 		recipe.addIngredient(ingredient);

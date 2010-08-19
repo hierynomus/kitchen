@@ -1,6 +1,6 @@
 package nl.xebia.si.university.kitchen.domain;
 
-public class Meat extends MealIngredient {
+public class Meat extends Product {
 
 	public Meat(final String name, Amount amount) {
 		super(name, amount);

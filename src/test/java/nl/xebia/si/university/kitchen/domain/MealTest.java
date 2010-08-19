@@ -19,7 +19,7 @@ public class MealTest {
 
 	@Test
 	public void shouldBeDoneWhenAllIngredientsAreCooked() throws Exception {
-		MealIngredient soleProduct = mock(MealIngredient.class);
+		Product soleProduct = mock(Product.class);
 		given(recipe.isSatisfiedBy(Arrays.asList(soleProduct))).willReturn(true);
 
 		meal.cook(soleProduct);

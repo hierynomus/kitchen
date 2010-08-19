@@ -39,10 +39,10 @@ public class Recipe {
 		ingredients.add(i);
 	}
 
-	public Boolean isSatisfiedBy(final List<MealIngredient> mealIngredients) {
+	public Boolean isSatisfiedBy(final List<Product> products) {
 		Collection<Ingredient> unsatisfiedIngredients = Collections2.filter(ingredients, new Predicate<Ingredient>() {
 			public boolean apply(Ingredient input) {
-				for (MealIngredient mealIngredient : mealIngredients) {
+				for (Product mealIngredient : products) {
 					if (input.isSatisfiedBy(mealIngredient)) {
 						return false;
 					}

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Meal {
 
-	private List<MealIngredient> ingredients = Lists.newArrayList();
+	private List<Product> ingredients = Lists.newArrayList();
 
 	private Recipe recipe;
 
@@ -16,7 +16,7 @@ public class Meal {
 		this.recipe = recipe;
 	}
 
-	public void cook(MealIngredient ingredient) {
+	public void cook(Product ingredient) {
 		ingredients.add(ingredient);
 	}
 
