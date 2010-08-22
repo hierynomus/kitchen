@@ -14,11 +14,15 @@
 
 	<i:channel id="ingredients"/>
 
+    <import resource="create-shoppinglists-flow.xml"/>
+
+    <i:channel id="shoppinglists"/>
+
 	<import resource="shopping-flow.xml"/>
 
 	<i:channel id="grocerybags"/>
 
-	<i:bridge id="grocerybagUnpacker" input-channel="grocerybags" output-channel="products"/>
+    <import resource="grocery-unpacker-flow.xml" />
 
 	<i:channel id="products"/>
 
@@ -31,4 +35,8 @@
 	<i:poller default="true">
 		<i:interval-trigger interval="1000"/>
 	</i:poller>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="kitchen.properties"/>
+    </bean>
 </beans>

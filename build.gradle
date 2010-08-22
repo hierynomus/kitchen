@@ -19,6 +19,7 @@ springVersion = '3.0.3.RELEASE'
 
 dependencies {
 	compile "org.springframework.integration:spring-integration-core:${springIntegrationVersion}"
+	compile "org.springframework.integration:spring-integration-file:${springIntegrationVersion}"
 	compile "org.springframework:spring-core:${springVersion}"
 	compile "org.springframework:spring-beans:${springVersion}"
 	compile "org.springframework:spring-context:${springVersion}"
@@ -30,6 +31,7 @@ dependencies {
 	testCompile "junit:junit:4.8.1"
 	testCompile "org.mockito:mockito-all:1.8.5"
 	testCompile "org.hamcrest:hamcrest-all:1.1"
+    testCompile "commons-io:commons-io:1.1"
 }
 
 task wrapper(type: Wrapper) {

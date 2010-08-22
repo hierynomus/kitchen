@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 			 xmlns:i="http://www.springframework.org/schema/integration"
+             xmlns:file="http://www.springframework.org/schema/integration/file"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+           http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
        ">
 
+    <bean id="recipebookLocation" class="java.io.File">
+        <constructor-arg value="${recipebook.location}"/>
+    </bean>
+
+    <file:inbound-channel-adapter id="recipebook" directory="${recipebook.location}" filename-pattern=".*\\.xml$" channel="recipes" prevent-duplicates="true" auto-create-directory="true"/>
 	<!-- read recipes -->
 </beans>

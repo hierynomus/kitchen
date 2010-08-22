@@ -15,11 +15,15 @@
 		</i:router>
 	</i:chain>
 
-	<i:transformer input-channel="meat" ref="butcher" output-channel="grocerybags"/>
-	<i:transformer input-channel="groceries" ref="supermarket" output-channel="grocerybags"/>
-	<i:transformer input-channel="vegetables" ref="green-grocer" output-channel="grocerybags"/>
+	<i:transformer input-channel="meat" ref="butcher" output-channel="walkTheStreet"/>
+	<i:transformer input-channel="groceries" ref="supermarket" output-channel="walkTheStreet"/>
+	<i:transformer input-channel="vegetables" ref="greenGrocer" output-channel="walkTheStreet"/>
+
+    <i:channel id="walkTheStreet"/>
+
+    <i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>
 
 	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>
 	<bean id="supermarket" class="nl.xebia.si.university.kitchen.shop.Supermarket"/>
-	<bean id="green-grocer" class="nl.xebia.si.university.kitchen.shop.GreenGrocer"/>
+	<bean id="greenGrocer" class="nl.xebia.si.university.kitchen.shop.GreenGrocer"/>
 </beans>

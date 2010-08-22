@@ -10,5 +10,11 @@ public class ShoppingList {
 
 	private List<Ingredient> items = Lists.newArrayList();
 
-	
+    public void addItem(Ingredient ingredient) {
+        items.add(ingredient);
+    }
+
+    public List<Ingredient> getItems() {
+        return items;
+    }
 }

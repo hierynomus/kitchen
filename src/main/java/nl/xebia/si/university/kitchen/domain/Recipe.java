@@ -40,16 +40,20 @@ public class Recipe {
 	}
 
 	public Boolean isSatisfiedBy(final List<Product> products) {
-		Collection<Ingredient> unsatisfiedIngredients = Collections2.filter(ingredients, new Predicate<Ingredient>() {
-			public boolean apply(Ingredient input) {
-				for (Product mealIngredient : products) {
-					if (input.isSatisfiedBy(mealIngredient)) {
-						return false;
-					}
-				}
-				return true;
-			}
-		});
-		return unsatisfiedIngredients.isEmpty();
+        Collection<Ingredient> unsatisfiedIngredients = findMissingIngredients(products);
+        return unsatisfiedIngredients.isEmpty();
 	}
+
+    private Collection<Ingredient> findMissingIngredients(final List<Product> products) {
+        return Collections2.filter(ingredients, new Predicate<Ingredient>() {
+            public boolean apply(Ingredient input) {
+                for (Product mealIngredient : products) {
+                    if (input.isSatisfiedBy(mealIngredient)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
+    }
 }
