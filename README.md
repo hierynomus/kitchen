@@ -37,3 +37,6 @@ Each lab can be found in a branch or the repository:
 
 * lab-1: Deal with converting a recipe into its separate ingredients.
 * lab-2: Deal with converting the ingredients of a recipe into their physical counterparts by shopping for them.
+* lab-3: Deal with getting all the products back together to create a meal
+* lab-4: Reading the recipes from the recipebook/filesystem
+* lab-5: Try to minimize the time spent shopping by making shoppinglists and grocerybags
