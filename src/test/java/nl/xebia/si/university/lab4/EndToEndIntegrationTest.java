@@ -45,5 +45,6 @@ public class EndToEndIntegrationTest {
         Message<?> message = meals.receive(20000);
         Meal meal = (Meal) message.getPayload();
         assertThat(meal.getRecipe().getName(), is("Pilav"));
+        assertThat(meal.isDone(), is(true));
     }
 }

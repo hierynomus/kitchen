@@ -32,7 +32,7 @@ public class KitchenTest {
 		Recipe r = RecipeObjectMother.steak();
 		recipes.send(MessageBuilder.withPayload(r).build());
 
-		final Message<Meal> message = (Message<Meal>) meals.receive();
+		final Message<Meal> message = (Message<Meal>) meals.receive(2000);
 		final Meal meal = message.getPayload();
 		assertThat(meal.getRecipe(), is(r));
 		assertThat(meal.isDone(), is(true));

@@ -39,13 +39,9 @@ public class ShoppingTest {
 	}
 
 	private void receiveAndCheckProductMessage(final Ingredient ingredient) {
-		final Message<Product> message = (Message<Product>) test.receive();
+		final Message<Product> message = (Message<Product>) test.receive(2000);
 		assertThat("Message was null", message, is(notNullValue()));
 		assertThat(message.getHeaders().get("recipe"), is(instanceOf(Recipe.class)));
 		assertThat(ingredient.isSatisfiedBy(message.getPayload()), is(true));
 	}
-
-	private void receiveAndCheckIngredientMessage(final Grocery product) {
-	}
-
 }
