@@ -19,10 +19,11 @@
 	<i:transformer input-channel="groceries" ref="supermarket" output-channel="walkTheStreet"/>
 	<i:transformer input-channel="vegetables" ref="greenGrocer" output-channel="walkTheStreet"/>
 
-    <i:channel id="walkTheStreet"/>
+	<i:channel id="walkTheStreet"/>
 
-    <i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>
-
+	<!--<i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>-->
+	<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>
+	
 	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>
 	<bean id="supermarket" class="nl.xebia.si.university.kitchen.shop.Supermarket"/>
 	<bean id="greenGrocer" class="nl.xebia.si.university.kitchen.shop.GreenGrocer"/>
