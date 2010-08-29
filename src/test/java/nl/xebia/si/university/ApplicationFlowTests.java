@@ -1,6 +1,6 @@
 package nl.xebia.si.university;
 
-import nl.xebia.si.university.kitchen.RecipeObjectMother;
+import nl.xebia.si.university.kitchen.domain.RecipeObjectMother;
 import nl.xebia.si.university.kitchen.domain.Amount;
 import nl.xebia.si.university.kitchen.domain.Grocery;
 import nl.xebia.si.university.kitchen.domain.Meal;

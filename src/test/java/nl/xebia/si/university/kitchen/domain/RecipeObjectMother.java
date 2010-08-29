@@ -1,4 +1,4 @@
-package nl.xebia.si.university.kitchen;
+package nl.xebia.si.university.kitchen.domain;
 
 import nl.xebia.si.university.kitchen.domain.Amount;
 import nl.xebia.si.university.kitchen.domain.Ingredient;

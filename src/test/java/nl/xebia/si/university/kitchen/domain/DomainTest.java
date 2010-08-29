@@ -1,4 +1,4 @@
-package com.xebia.si.university.kitchen.domain;
+package nl.xebia.si.university.kitchen.domain;
 
 import com.thoughtworks.xstream.XStream;
 import nl.xebia.si.university.kitchen.domain.*;
