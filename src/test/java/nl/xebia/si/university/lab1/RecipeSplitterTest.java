@@ -1,4 +1,4 @@
-package nl.xebia.si.university;
+package nl.xebia.si.university.lab1;
 
 import nl.xebia.si.university.kitchen.RecipeObjectMother;
 import nl.xebia.si.university.kitchen.domain.Amount;
