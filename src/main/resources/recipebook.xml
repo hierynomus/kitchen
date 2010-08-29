@@ -9,14 +9,8 @@
            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
        ">
 
-	<bean id="recipebookLocation" class="nl.xebia.si.university.kitchen.domain.RecipeBook" destroy-method="cleanUp"/>
-
-	<file:inbound-channel-adapter id="recipebook" directory="#{recipebookLocation}"
-	                              channel="recipeFiles" prevent-duplicates="true" auto-create-directory="false" />
-
-	<i:channel id="recipeFiles"/>
-
-	<i:transformer id="reader" input-channel="recipeFiles" output-channel="recipes" ref="recipeBookReader" />
-
-	<bean id="recipeBookReader" class="nl.xebia.si.university.kitchen.domain.RecipeBookReader"/>
+    <file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
+																	filename-pattern=".*\.xml$" channel="recipesFiles"
+																	auto-create-directory="true"/>
+	<!-- read recipes -->
 </beans>
