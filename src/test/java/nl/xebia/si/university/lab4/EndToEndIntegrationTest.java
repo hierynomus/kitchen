@@ -1,8 +1,7 @@
-package nl.xebia.si.university;
+package nl.xebia.si.university.lab4;
 
 import nl.xebia.si.university.kitchen.domain.Meal;
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,6 @@ public class EndToEndIntegrationTest {
     private File recipebookLocation;
 
     @Test
-    @Ignore
     public void shouldCreateAMeal() throws IOException {
         File resource = new ClassPathResource("/pilav.xml").getFile();
         FileUtils.copyFile(resource, new File(recipebookLocation, "pilav.xml"));

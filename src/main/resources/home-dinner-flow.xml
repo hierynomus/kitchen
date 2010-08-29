@@ -37,6 +37,6 @@
 	</i:poller>
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="kitchen.properties"/>
+		<property name="location" value="classpath:kitchen.properties"/>
 	</bean>
 </beans>
