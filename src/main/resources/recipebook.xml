@@ -9,10 +9,10 @@
            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
        ">
 
-    <bean id="recipebookLocation" class="java.io.File">
-        <constructor-arg value="${recipebook.location}"/>
-    </bean>
+    <!--<bean id="recipebookLocation" class="java.io.File">-->
+        <!--<constructor-arg value="${recipebook.location}"/>-->
+    <!--</bean>-->
 
-    <file:inbound-channel-adapter id="recipebook" directory="${recipebook.location}" filename-pattern=".*\\.xml$" channel="recipes" prevent-duplicates="true" auto-create-directory="true"/>
+    <!--<file:inbound-channel-adapter id="recipebook" directory="${recipebook.location}" filename-pattern=".*\\.xml$" channel="recipes" prevent-duplicates="true" auto-create-directory="true"/>-->
 	<!-- read recipes -->
 </beans>

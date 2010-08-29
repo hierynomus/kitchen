@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<i:chain id="ingredientsToShops" input-channel="ingredients">
+	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
 		<i:router expression="payload.type">
 			<i:mapping value="Meat" channel="meat"/>
 			<i:mapping value="Vegetable" channel="vegetables"/>

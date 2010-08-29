@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-			 xmlns:i="http://www.springframework.org/schema/integration"
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			 xsi:schemaLocation="
+       xmlns:i="http://www.springframework.org/schema/integration"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
@@ -14,15 +14,15 @@
 
 	<i:channel id="ingredients"/>
 
-    <import resource="create-shoppinglists-flow.xml"/>
+	<import resource="create-shoppinglists-flow.xml"/>
 
-    <i:channel id="shoppinglists"/>
+	<i:channel id="shoppinglists"/>
 
 	<import resource="shopping-flow.xml"/>
 
 	<i:channel id="grocerybags"/>
 
-    <import resource="grocery-unpacker-flow.xml" />
+	<import resource="grocery-unpacker-flow.xml"/>
 
 	<i:channel id="products"/>
 
@@ -36,7 +36,7 @@
 		<i:interval-trigger interval="1000"/>
 	</i:poller>
 
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="kitchen.properties"/>
-    </bean>
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="kitchen.properties"/>
+	</bean>
 </beans>
