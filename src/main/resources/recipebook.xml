@@ -12,8 +12,10 @@
 	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
 	                              filename-pattern=".*\.xml$" channel="recipeFiles"
 	                              auto-create-directory="true"/>
-	
-	<i:chain input-channel="recipeFiles" output-channel="recipes">
+
+	<i:channel id="recipeFiles" />
+
+	<i:chain id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes">
 		<file:file-to-string-transformer/>
 		<si-xml:unmarshalling-transformer unmarshaller="xstreamUnmarshaller"/>
 	</i:chain>
