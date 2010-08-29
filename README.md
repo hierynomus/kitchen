@@ -34,5 +34,6 @@ When aggregating is done without a previous symmetric splitting, it also becomes
 
 # The Labs
 Each lab can be found in a branch or the repository:
+
 * lab-1: Deal with converting a recipe into its separate ingredients.
 * lab-2: Deal with converting the ingredients of a recipe into their physical counterparts by shopping for them.
