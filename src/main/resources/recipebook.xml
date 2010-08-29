@@ -3,15 +3,29 @@
        xmlns:i="http://www.springframework.org/schema/integration"
        xmlns:file="http://www.springframework.org/schema/integration/file"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:si-xml="http://www.springframework.org/schema/integration/xml"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-           http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
-       ">
+           http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
 
 	<!-- read recipes from disk -->
 	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
-																	filename-pattern=".*\.xml$" channel="recipeFiles"
-																	auto-create-directory="true"/>
+	                              filename-pattern=".*\.xml$" channel="recipeFiles"
+	                              auto-create-directory="true"/>
+	
+	<i:chain input-channel="recipeFiles" output-channel="recipes">
+		<file:file-to-string-transformer/>
+		<si-xml:unmarshalling-transformer unmarshaller="xstreamUnmarshaller"/>
+	</i:chain>
+
+	<bean id="xstreamUnmarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true"/>
+		<property name="annotatedClasses">
+			<array>
+				<value>nl.xebia.si.university.kitchen.domain.Recipe</value>
+				<value>nl.xebia.si.university.kitchen.domain.Ingredient</value>
+			</array>
+		</property>
+	</bean>
 
 </beans>

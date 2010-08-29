@@ -8,10 +8,6 @@
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 	<import resource="recipebook.xml"/>
 
-	<i:channel id="recipeFiles"/>
-
-	<import resource="recipe-unmarshaller.xml"/>
-
 	<i:channel id="recipes"/>
 
 	<import resource="split-recipe-flow.xml"/>
