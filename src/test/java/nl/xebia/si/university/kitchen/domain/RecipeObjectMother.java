@@ -1,9 +1,5 @@
 package nl.xebia.si.university.kitchen.domain;
 
-import nl.xebia.si.university.kitchen.domain.Amount;
-import nl.xebia.si.university.kitchen.domain.Ingredient;
-import nl.xebia.si.university.kitchen.domain.Recipe;
-
 /**
  */
 public class RecipeObjectMother {
@@ -15,4 +11,11 @@ public class RecipeObjectMother {
 		return recipe;
 	}
 
+	public static Recipe steak() {
+		Recipe recipe = new Recipe("steak");
+		recipe.addIngredient(new Ingredient("steak", new Amount(1, Amount.Unit.PIECES), Ingredient.Type.Meat));
+		recipe.addIngredient(new Ingredient("pepper", new Amount(2, Amount.Unit.GRAMS), Ingredient.Type.Grocery));
+		recipe.addIngredient(new Ingredient("salt", new Amount(2, Amount.Unit.GRAMS), Ingredient.Type.Grocery));
+		return recipe;
+	}
 }
