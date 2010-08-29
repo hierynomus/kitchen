@@ -19,7 +19,7 @@
 >>>>>>> 0362a27... extracted test-overridable properties for input directory and fixed filename-pattern
 	<import resource="recipebook.xml"/>
 
-	<i:channel id="recipesFiles"/>
+	<i:channel id="recipeFiles"/>
 
 	<import resource="recipe-unmarshaller.xml"/>
 

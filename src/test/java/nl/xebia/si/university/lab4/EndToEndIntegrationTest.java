@@ -42,7 +42,7 @@ public class EndToEndIntegrationTest {
 		//then rename
 		recipeWriting.renameTo(recipeBookLocation.newFile("pilav.xml"));
 
-        Message<?> message = meals.receive(10000);
+        Message<?> message = meals.receive(20000);
         Meal meal = (Meal) message.getPayload();
         assertThat(meal.getRecipe().getName(), is("Pilav"));
     }

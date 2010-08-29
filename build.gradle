@@ -20,6 +20,7 @@ springVersion = '3.0.3.RELEASE'
 dependencies {
 	compile "org.springframework.integration:spring-integration-core:${springIntegrationVersion}"
 	compile "org.springframework.integration:spring-integration-file:${springIntegrationVersion}"
+	compile "org.springframework.integration:spring-integration-xml:${springIntegrationVersion}"
 	compile "org.springframework:spring-core:${springVersion}"
 	compile "org.springframework:spring-beans:${springVersion}"
 	compile "org.springframework:spring-context:${springVersion}"

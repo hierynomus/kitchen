@@ -11,7 +11,7 @@
 
 	<!-- read recipes from disk -->
 	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
-																	filename-pattern=".*\.xml$" channel="recipesFiles"
+																	filename-pattern=".*\.xml$" channel="recipeFiles"
 																	auto-create-directory="true"/>
 
 </beans>
