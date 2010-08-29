@@ -2,10 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:i="http://www.springframework.org/schema/integration"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-       ">
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 	<import resource="recipebook.xml"/>
 
 	<i:channel id="recipes"/>
@@ -32,7 +32,7 @@
 		<i:queue capacity="50"/>
 	</i:channel>
 
-	<i:poller default="true">
-		<i:interval-trigger interval="1000"/>
-	</i:poller>
+	<i:poller default="true" fixed-rate="1000"/>
+
+	<util:properties id="conf" location="kitchen.properties"/>
 </beans>
