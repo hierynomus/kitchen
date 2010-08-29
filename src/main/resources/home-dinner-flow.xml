@@ -35,8 +35,4 @@
 	<i:poller default="true">
 		<i:interval-trigger interval="1000"/>
 	</i:poller>
-
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:kitchen.properties"/>
-	</bean>
 </beans>
