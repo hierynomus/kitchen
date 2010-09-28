@@ -10,6 +10,9 @@
 
 	<bean id="cook" class="nl.xebia.si.university.kitchen.Cook"/>
 
+	<!-- TODO lab3: Make sure the meal gets prepared by the cook -->
+	<!--<i:bridge id="kitchen" input-channel="products" output-channel="meals"	/>-->
+	
 	<i:aggregator
 		id="kitchen"
 		input-channel="products"

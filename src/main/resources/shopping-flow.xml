@@ -7,6 +7,9 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
+	<!-- TODO lab2: Replace the bridge with
+	<!--<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />-->
+
 	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
 		<i:router expression="payload.type">
 			<i:mapping value="Meat" channel="meat"/>
@@ -21,6 +24,7 @@
 
 	<i:channel id="walkTheStreet"/>
 
+	<!-- TODO lab5: Walking to and fro the shops takes time, make sure we don't visit them too often -->
 	<!--<i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>-->
 	<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>
 	

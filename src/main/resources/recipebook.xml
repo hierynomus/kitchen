@@ -9,11 +9,16 @@
            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
 
 	<!-- read recipes from disk -->
+	<!-- TODO lab4: Read recipe XMLs from disk -->
+
 	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
 	                              filename-pattern=".*\.xml$" channel="recipeFiles"
 	                              auto-create-directory="true"/>
 
 	<i:channel id="recipeFiles" />
+
+	<!-- TODO lab4: Convert the file into a recipe using the xstreamUnmarshaller provided, replace bridge -->
+	<!--<i:bridge id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes" />-->
 
 	<i:chain id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes">
 		<file:file-to-string-transformer/>

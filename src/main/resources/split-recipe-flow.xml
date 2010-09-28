@@ -7,6 +7,8 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
+	<!-- TODO Lab1: Change Bridge to something that splits the recipe into its ingredients -->
+	<!--<i:bridge id="splitRecipesIntoIngredients" input-channel="recipes" output-channel="ingredients"/>-->
 	<i:chain id="splitRecipesIntoIngredients" input-channel="recipes" output-channel="ingredients">
 		<i:header-enricher>
 			<i:header name="recipe" expression="payload"/>
