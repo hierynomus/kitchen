@@ -8,7 +8,6 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
 
-	<!-- read recipes from disk -->
 	<!-- TODO lab4: Read recipe XMLs from disk -->
 
 	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"

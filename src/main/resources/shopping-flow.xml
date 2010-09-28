@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<!-- TODO lab2: Replace the bridge with
+	<!-- TODO lab2: Go shopping at the butcher, supermarket and greenGrocer, replace bridge -->
 	<!--<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />-->
 
 	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
