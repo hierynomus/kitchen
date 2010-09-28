@@ -26,7 +26,6 @@ public class Cook implements ReleaseStrategy {
 
 	@Aggregator
 	public Meal prepareMeal(List<Message<Product>> products) {
-		//in RC1 signatures like prepareMeal(@Header Recipe recipe, @Payloads List<Product> products) will be supported
 		Recipe recipe = (Recipe) products.get(0).getHeaders().get("recipe");
 		Meal meal = getMealForRecipe(recipe);
 		for (Message<Product> message : products) {
@@ -40,10 +39,6 @@ public class Cook implements ReleaseStrategy {
 		return message.getHeaders().get("recipe");
 	}
 
-	public boolean isRecipeSatisfied(Recipe recipe, List<Product> products){
-		return recipe.isSatisfiedBy(products);
-	}
-
 	private Meal getMealForRecipe(Recipe recipe) {
 		Meal meal = misEnPlace.get(recipe);
 		if (meal == null) {
@@ -55,11 +50,15 @@ public class Cook implements ReleaseStrategy {
 
 	public boolean canRelease(MessageGroup group) {
 		Recipe recipe = (Recipe) group.getGroupId();
-		return isRecipeSatisfied(recipe, new ArrayList<Product>(
+		return recipe.isSatisfiedBy(productsFromMessages(group));
+	}
+
+	private ArrayList<Product> productsFromMessages(MessageGroup group) {
+		return new ArrayList<Product>(
 				Collections2.transform(group.getUnmarked(), new Function<Message<?>, Product>() {
-			public Product apply(Message<?> from) {
-				return (Product) from.getPayload();
-			}
-		})));
+					public Product apply(Message<?> from) {
+						return (Product) from.getPayload();
+					}
+				}));
 	}
 }
