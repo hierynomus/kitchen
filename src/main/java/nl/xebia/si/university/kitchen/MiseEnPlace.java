@@ -3,22 +3,19 @@ package nl.xebia.si.university.kitchen;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import nl.xebia.si.university.kitchen.domain.Ingredient;
 import nl.xebia.si.university.kitchen.domain.Product;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.springframework.integration.Message;
 import org.springframework.integration.annotation.Aggregator;
 import org.springframework.integration.annotation.CorrelationStrategy;
-import org.springframework.integration.annotation.ReleaseStrategy;
 import org.springframework.integration.annotation.ServiceActivator;
-import org.springframework.integration.core.MessageBuilder;
 import org.springframework.integration.store.MessageGroup;
+import org.springframework.integration.support.MessageBuilder;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 

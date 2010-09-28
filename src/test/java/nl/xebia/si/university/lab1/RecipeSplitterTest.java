@@ -1,17 +1,13 @@
 package nl.xebia.si.university.lab1;
 
-import nl.xebia.si.university.kitchen.domain.RecipeObjectMother;
-import nl.xebia.si.university.kitchen.domain.Amount;
-import nl.xebia.si.university.kitchen.domain.Grocery;
-import nl.xebia.si.university.kitchen.domain.Ingredient;
-import nl.xebia.si.university.kitchen.domain.Recipe;
+import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.Message;
-import org.springframework.integration.core.MessageBuilder;
-import org.springframework.integration.core.MessageChannel;
+import org.springframework.integration.MessageChannel;
 import org.springframework.integration.core.PollableChannel;
+import org.springframework.integration.support.MessageBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

@@ -4,7 +4,7 @@ import nl.xebia.si.university.kitchen.domain.*;
 import org.junit.Test;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.integration.Message;
-import org.springframework.integration.core.MessageBuilder;
+import org.springframework.integration.support.MessageBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
