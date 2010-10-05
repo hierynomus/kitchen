@@ -8,30 +8,8 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
            http://www.springframework.org/schema/integration/file http://www.springframework.org/schema/integration/file/spring-integration-file.xsd http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
 
-	<!-- TODO lab-4: Read recipe XMLs from disk -->
-
-	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
-	                              filename-pattern=".*\.xml$" channel="recipeFiles"
-	                              auto-create-directory="true"/>
-
 	<i:channel id="recipeFiles" />
 
-	<!-- TODO lab-4: Convert the file into a recipe using the xstreamUnmarshaller provided, replace bridge -->
-	<!--<i:bridge id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes" />-->
-
-	<i:chain id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes">
-		<file:file-to-string-transformer/>
-		<si-xml:unmarshalling-transformer unmarshaller="xstreamUnmarshaller"/>
-	</i:chain>
-
-	<bean id="xstreamUnmarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
-		<property name="autodetectAnnotations" value="true"/>
-		<property name="annotatedClasses">
-			<array>
-				<value>nl.xebia.si.university.kitchen.domain.Recipe</value>
-				<value>nl.xebia.si.university.kitchen.domain.Ingredient</value>
-			</array>
-		</property>
-	</bean>
+	<i:bridge id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes" />
 
 </beans>
