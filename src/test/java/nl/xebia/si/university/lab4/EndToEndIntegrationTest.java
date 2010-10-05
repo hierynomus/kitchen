@@ -44,7 +44,7 @@ public class EndToEndIntegrationTest {
 		//then rename
 		recipeWriting.renameTo(recipeBookLocation.newFile("pilav.xml"));
 
-        Message<?> message = timed.receive(7000);
+        Message<?> message = timed.receive(3500);
         Meal meal = (Meal) message.getPayload();
         assertThat(meal.getRecipe().getName(), is("Pilav"));
         assertThat(meal.isDone(), is(true));

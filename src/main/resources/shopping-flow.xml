@@ -11,6 +11,9 @@
 	<!--<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />-->
 
 	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
+		<i:header-enricher>
+			<i:header name="delayMe" expression="(headers[$sequenceNumber] != null ? headers[$sequenceNumber] : 1) * 2000"/>
+		</i:header-enricher>
 		<i:router expression="payload.type">
 			<i:mapping value="Meat" channel="meat"/>
 			<i:mapping value="Vegetable" channel="vegetables"/>
@@ -25,7 +28,7 @@
 	<i:channel id="walkTheStreet"/>
 
 	<!-- TODO lab5: Walking to and fro the shops takes time, make sure we don't visit them too often -->
-	<i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>
+	<i:delayer default-delay="2000" delay-header-name="delayMe" input-channel="walkTheStreet" output-channel="grocerybags" />
 	<!--<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>-->
 	
 	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>

@@ -36,7 +36,7 @@ public class KitchenTest {
 		Recipe r = RecipeObjectMother.steak();
 		recipes.send(MessageBuilder.withPayload(r).build());
 
-		final Message<Meal> message = timed.receive(6000);
+		final Message<Meal> message = timed.receive(2500);
 		assertThat("Message was null", message, Matchers.is(notNullValue()));
 		final Meal meal = message.getPayload();
 		assertThat(meal.getRecipe(), is(r));
