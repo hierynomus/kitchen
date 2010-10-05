@@ -7,29 +7,9 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<!-- TODO lab-2: Go shopping at the butcher, supermarket and greenGrocer, replace bridge -->
-	<!--<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />-->
-
-	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
-		<i:header-enricher>
-			<i:header name="delayMe" expression="(headers[$sequenceNumber] != null ? headers[$sequenceNumber] : 1) * 2000"/>
-		</i:header-enricher>
-		<i:router expression="payload.type">
-			<i:mapping value="Meat" channel="meat"/>
-			<i:mapping value="Vegetable" channel="vegetables"/>
-			<i:mapping value="Grocery" channel="groceries"/>
-		</i:router>
-	</i:chain>
-
-	<i:transformer input-channel="meat" ref="butcher" output-channel="walkTheStreet"/>
-	<i:transformer input-channel="groceries" ref="supermarket" output-channel="walkTheStreet"/>
-	<i:transformer input-channel="vegetables" ref="greenGrocer" output-channel="walkTheStreet"/>
+	<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />
 
 	<i:channel id="walkTheStreet"/>
 
 	<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>
-	
-	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>
-	<bean id="supermarket" class="nl.xebia.si.university.kitchen.shop.Supermarket"/>
-	<bean id="greenGrocer" class="nl.xebia.si.university.kitchen.shop.GreenGrocer"/>
 </beans>
