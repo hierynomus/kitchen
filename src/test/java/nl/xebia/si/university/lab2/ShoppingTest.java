@@ -1,6 +1,10 @@
 package nl.xebia.si.university.lab2;
 
-import nl.xebia.si.university.kitchen.domain.*;
+import nl.xebia.si.university.TimedPollableChannel;
+import nl.xebia.si.university.kitchen.domain.Ingredient;
+import nl.xebia.si.university.kitchen.domain.Product;
+import nl.xebia.si.university.kitchen.domain.Recipe;
+import nl.xebia.si.university.kitchen.domain.RecipeObjectMother;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +15,8 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static nl.xebia.si.university.kitchen.domain.Amount.Unit.GRAMS;
-import static nl.xebia.si.university.kitchen.domain.Amount.Unit.PIECES;
-import static nl.xebia.si.university.kitchen.domain.Ingredient.Type.Grocery;
-import static nl.xebia.si.university.kitchen.domain.Ingredient.Type.Meat;
+import java.util.List;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -32,16 +34,26 @@ public class ShoppingTest {
 	@Test
 	public void shouldConvertRecipeIntoIngredients() {
 		Recipe recipe = RecipeObjectMother.steak();
+		List<Ingredient> needed = RecipeObjectMother.steak().getIngredients();
 		recipes.send(MessageBuilder.withPayload(recipe).build());
-		receiveAndCheckProductMessage(new Ingredient("steak", new Amount(1, PIECES), Meat));
-		receiveAndCheckProductMessage(new Ingredient("pepper", new Amount(2, GRAMS), Grocery));
-		receiveAndCheckProductMessage(new Ingredient("salt", new Amount(2, GRAMS), Grocery));
+		receiveAndCheckProductMessage(needed);
+		receiveAndCheckProductMessage(needed);
+		receiveAndCheckProductMessage(needed);
 	}
 
-	private void receiveAndCheckProductMessage(final Ingredient ingredient) {
-		final Message<Product> message = (Message<Product>) test.receive(2000);
+	private void receiveAndCheckProductMessage(final List<Ingredient> ingredients) {
+		final TimedPollableChannel timed = new TimedPollableChannel(test);
+		final Message<Product> message = timed.receive(6000);
 		assertThat("Message was null", message, is(notNullValue()));
 		assertThat(message.getHeaders().get("recipe"), is(instanceOf(Recipe.class)));
-		assertThat(ingredient.isSatisfiedBy(message.getPayload()), is(true));
+		boolean found = false;
+		for (Ingredient ingredient : ingredients) {
+			if (ingredient.isSatisfiedBy(message.getPayload())) {
+				found = true;
+				ingredients.remove(ingredient);
+				break;
+			}
+		}
+		assertThat(found, is(true));
 	}
 }

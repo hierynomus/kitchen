@@ -1,5 +1,6 @@
 package nl.xebia.si.university.lab4;
 
+import nl.xebia.si.university.TimedPollableChannel;
 import nl.xebia.si.university.kitchen.domain.Meal;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -35,14 +36,15 @@ public class EndToEndIntegrationTest {
 
     @Test
     public void shouldCreateAMeal() throws IOException {
-        File resource = new ClassPathResource("/pilav.xml").getFile();
+	    final TimedPollableChannel timed = new TimedPollableChannel(meals);
+	    File resource = new ClassPathResource("/pilav.xml").getFile();
 		//copy
 		File recipeWriting = recipeBookLocation.newFile("pilav.xml.writing");
 		FileUtils.copyFile(resource, recipeWriting);
 		//then rename
 		recipeWriting.renameTo(recipeBookLocation.newFile("pilav.xml"));
 
-        Message<?> message = meals.receive(20000);
+        Message<?> message = timed.receive(7000);
         Meal meal = (Meal) message.getPayload();
         assertThat(meal.getRecipe().getName(), is("Pilav"));
         assertThat(meal.isDone(), is(true));

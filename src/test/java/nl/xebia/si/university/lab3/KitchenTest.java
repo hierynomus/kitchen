@@ -1,8 +1,10 @@
 package nl.xebia.si.university.lab3;
 
+import nl.xebia.si.university.TimedPollableChannel;
 import nl.xebia.si.university.kitchen.domain.Meal;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import nl.xebia.si.university.kitchen.domain.RecipeObjectMother;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -29,10 +32,12 @@ public class KitchenTest {
 
 	@Test
 	public void shouldPrepareMealFromRecipe() {
+		final TimedPollableChannel timed = new TimedPollableChannel(meals);
 		Recipe r = RecipeObjectMother.steak();
 		recipes.send(MessageBuilder.withPayload(r).build());
 
-		final Message<Meal> message = (Message<Meal>) meals.receive(2000);
+		final Message<Meal> message = timed.receive(6000);
+		assertThat("Message was null", message, Matchers.is(notNullValue()));
 		final Meal meal = message.getPayload();
 		assertThat(meal.getRecipe(), is(r));
 		assertThat(meal.isDone(), is(true));
