@@ -33,8 +33,6 @@ public class EndToEndIntegrationTest {
     @Autowired
     private PollableChannel meals;
 
-	@Autowired Object recipebook;
-
     @Test
     public void shouldCreateAMeal() throws IOException {
 	    final TimedPollableChannel timed = new TimedPollableChannel(meals);
