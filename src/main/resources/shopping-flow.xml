@@ -25,8 +25,8 @@
 	<i:channel id="walkTheStreet"/>
 
 	<!-- TODO lab5: Walking to and fro the shops takes time, make sure we don't visit them too often -->
-	<!--<i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>-->
-	<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>
+	<i:delayer default-delay="5000" input-channel="walkTheStreet" output-channel="grocerybags"/>
+	<!--<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>-->
 	
 	<bean id="butcher" class="nl.xebia.si.university.kitchen.shop.Butcher"/>
 	<bean id="supermarket" class="nl.xebia.si.university.kitchen.shop.Supermarket"/>

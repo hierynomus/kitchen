@@ -39,6 +39,15 @@ public class Recipe {
 		ingredients.add(i);
 	}
 
+	public Integer itemsOfType(final Ingredient.Type type) {
+		return Collections2.filter(ingredients, new Predicate<Ingredient>() {
+			@Override
+			public boolean apply(final Ingredient input) {
+				return input.getType() == type;
+			}
+		}).size();
+	}
+
 	public Boolean isSatisfiedBy(final List<Product> products) {
         Collection<Ingredient> unsatisfiedIngredients = findMissingIngredients(products);
         return unsatisfiedIngredients.isEmpty();

@@ -4,10 +4,9 @@ import nl.xebia.si.university.kitchen.domain.Ingredient;
 import nl.xebia.si.university.kitchen.domain.ShoppingList;
 import org.springframework.integration.annotation.Aggregator;
 import org.springframework.integration.annotation.CorrelationStrategy;
-import org.springframework.integration.annotation.ReleaseStrategy;
+import org.springframework.integration.store.MessageGroup;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * I write out shoppinglists, whilst ensuring that on each shoppinglist only ingredients
@@ -15,11 +14,11 @@ import java.util.concurrent.ConcurrentMap;
  * 
  * @author Jeroen van Erp
  */
-public class ShoppingListWriter {
+public class ShoppingListWriter implements org.springframework.integration.aggregator.ReleaseStrategy {
 
     @Aggregator
     public ShoppingList sendShoppingList(List<Ingredient> ingredients) {
-        ShoppingList list = new ShoppingList();
+        ShoppingList list = new ShoppingList(ingredients.get(0).getType());
         for (Ingredient ingredient : ingredients) {
             list.addItem(ingredient);
         }
@@ -32,8 +31,8 @@ public class ShoppingListWriter {
         return ingredient.getType();
     }
 
-    @ReleaseStrategy
-    public boolean canGoToShop(List<Ingredient> ingredients) {
-        return ingredients.size() > 5;
-    }
+	@Override
+	public boolean canRelease(final MessageGroup group) {
+		return group.isComplete();
+	}
 }
