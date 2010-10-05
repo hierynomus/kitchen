@@ -12,9 +12,14 @@ public abstract class Product {
 	}
 
 	public boolean satisfies(String name, Amount amount, Ingredient.Type type) {
-		return this.name.equals(name)&&this.amount.equals(amount)&&hasType(type);
+		return this.name.equals(name) && this.amount.equals(amount) && hasType(type);
 
 	}
 
 	protected abstract boolean hasType(Ingredient.Type type);
+
+	@Override
+	public String toString() {
+		return "Product[" + amount + " of " + name + "]";
+	}
 }

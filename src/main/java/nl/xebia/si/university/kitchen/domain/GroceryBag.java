@@ -17,4 +17,9 @@ public class GroceryBag<T extends Product> {
     public Set<T> unpack() {
         return items;
     }
+
+	@Override
+	public String toString() {
+		return "GroceryBag[" + items + "]";
+	}
 }

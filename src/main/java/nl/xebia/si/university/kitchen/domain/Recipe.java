@@ -56,4 +56,9 @@ public class Recipe {
             }
         });
     }
+
+	@Override
+	public String toString() {
+		return "Recipe[" + name + "]";
+	}
 }

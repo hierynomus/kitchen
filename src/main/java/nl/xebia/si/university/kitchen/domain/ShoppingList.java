@@ -17,4 +17,8 @@ public class ShoppingList {
     public List<Ingredient> getItems() {
         return items;
     }
+	@Override
+	public String toString() {
+		return "ShoppingList[" + type + "] with ingredients [" + items + "]";
+	}
 }

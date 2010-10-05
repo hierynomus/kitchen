@@ -42,4 +42,9 @@ public class Amount {
 	public Unit getUnit() {
 		return unit;
 	}
+
+	@Override
+	public String toString() {
+		return amount + " " + unit.name().toLowerCase();
+	}
 }

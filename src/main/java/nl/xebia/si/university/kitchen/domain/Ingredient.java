@@ -41,4 +41,9 @@ public class Ingredient {
 	public Type getType() {
 		return type;
 	}
+
+	@Override
+	public String toString() {
+		return type + "[" + amount + " of " + name + "]";
+	}
 }
