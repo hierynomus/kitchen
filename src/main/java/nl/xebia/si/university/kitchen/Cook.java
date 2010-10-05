@@ -6,9 +6,6 @@ import nl.xebia.si.university.kitchen.domain.Meal;
 import nl.xebia.si.university.kitchen.domain.Product;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.springframework.integration.Message;
-import org.springframework.integration.annotation.Aggregator;
-import org.springframework.integration.annotation.CorrelationStrategy;
-import org.springframework.integration.annotation.ReleaseStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,6 @@ import java.util.List;
  */
 public class Cook {
 
-	@Aggregator
 	public Meal prepareMeal(List<Message<Product>> products) {
 		Recipe recipe = (Recipe) products.get(0).getHeaders().get("recipe");
 		Meal meal = new Meal(recipe);
@@ -30,12 +26,10 @@ public class Cook {
 		return meal;
 	}
 
-	@CorrelationStrategy
 	public Object correlatingRecipeFor(Message<Product> message) {
 		return message.getHeaders().get("recipe");
 	}
 
-	@ReleaseStrategy
 	public boolean canCookMeal(List<Message<?>> products) {
 		Recipe recipe = (Recipe) products.get(0).getHeaders().get("recipe");
 		return recipe.isSatisfiedBy(productsFromMessages(products));
