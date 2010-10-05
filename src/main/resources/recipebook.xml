@@ -10,19 +10,10 @@
 
 	<!-- TODO lab-4: Read recipe XMLs from disk -->
 
-	<file:inbound-channel-adapter id="recipebook" directory="#{conf.get('recipebook.location')}"
-	                              filename-pattern=".*\.xml$" channel="recipeFiles"
-	                              auto-create-directory="true"/>
-
 	<i:channel id="recipeFiles" />
 
 	<!-- TODO lab-4: Convert the file into a recipe using the xstreamUnmarshaller provided, replace bridge -->
-	<!--<i:bridge id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes" />-->
-
-	<i:chain id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes">
-		<file:file-to-string-transformer/>
-		<si-xml:unmarshalling-transformer unmarshaller="xstreamUnmarshaller"/>
-	</i:chain>
+	<i:bridge id="filesToRecipes" input-channel="recipeFiles" output-channel="recipes" />
 
 	<bean id="xstreamUnmarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
 		<property name="autodetectAnnotations" value="true"/>
