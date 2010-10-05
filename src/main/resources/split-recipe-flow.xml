@@ -8,12 +8,6 @@
        ">
 
 	<!-- TODO Lab-1: Split a recipe into its ingredients, replace bridge -->
-	<!--<i:bridge id="splitRecipesIntoIngredients" input-channel="recipes" output-channel="ingredients"/>-->
-	<i:chain id="splitRecipesIntoIngredients" input-channel="recipes" output-channel="ingredients">
-		<i:header-enricher>
-			<i:header name="recipe" expression="payload"/>
-		</i:header-enricher>
-		<i:splitter expression="payload.ingredients"/>
-	</i:chain>
+	<i:bridge id="splitRecipesIntoIngredients" input-channel="recipes" output-channel="ingredients"/>
 
 </beans>
