@@ -12,8 +12,6 @@ import org.springframework.integration.annotation.ReleaseStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * I am in control of the kitchen.
@@ -21,12 +19,11 @@ import java.util.concurrent.ConcurrentMap;
  * @author Iwein Fuld
  */
 public class Cook {
-	private final ConcurrentMap<Recipe, Meal> misEnPlace = new ConcurrentHashMap<Recipe, Meal>();
 
 	@Aggregator
 	public Meal prepareMeal(List<Message<Product>> products) {
 		Recipe recipe = (Recipe) products.get(0).getHeaders().get("recipe");
-		Meal meal = getMealForRecipe(recipe);
+		Meal meal = new Meal(recipe);
 		for (Message<Product> message : products) {
 			meal.cook(message.getPayload());
 		}
@@ -36,15 +33,6 @@ public class Cook {
 	@CorrelationStrategy
 	public Object correlatingRecipeFor(Message<Product> message) {
 		return message.getHeaders().get("recipe");
-	}
-
-	private Meal getMealForRecipe(Recipe recipe) {
-		Meal meal = misEnPlace.get(recipe);
-		if (meal == null) {
-			misEnPlace.putIfAbsent(recipe, new Meal(recipe));
-			meal = misEnPlace.get(recipe);
-		}
-		return meal;
 	}
 
 	@ReleaseStrategy
