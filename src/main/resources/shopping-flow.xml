@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<!-- TODO lab2: Go shopping at the butcher, supermarket and greenGrocer, replace bridge -->
+	<!-- TODO lab-2: Go shopping at the butcher, supermarket and greenGrocer, replace bridge -->
 	<!--<i:bridge id="ingredientsToShops" input-channel="shoppinglists" output-channel="grocerybags" />-->
 
 	<i:chain id="ingredientsToShops" input-channel="shoppinglists">
@@ -27,7 +27,7 @@
 
 	<i:channel id="walkTheStreet"/>
 
-	<!-- TODO lab5: Walking to and fro the shops takes time, make sure we don't visit them too often -->
+	<!-- lab-5: Walking to and fro the shops takes time, make sure we don't visit them too often -->
 	<i:delayer default-delay="2000" delay-header-name="delayMe" input-channel="walkTheStreet" output-channel="grocerybags" />
 	<!--<i:bridge input-channel="walkTheStreet" output-channel="grocerybags"/>-->
 	

@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -45,6 +46,7 @@ public class EndToEndIntegrationTest {
 		recipeWriting.renameTo(recipeBookLocation.newFile("pilav.xml"));
 
         Message<?> message = timed.receive(3500);
+	    assertThat(message, is(notNullValue()));
         Meal meal = (Meal) message.getPayload();
         assertThat(meal.getRecipe().getName(), is("Pilav"));
         assertThat(meal.isDone(), is(true));
