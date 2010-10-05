@@ -12,13 +12,8 @@
 	<!-- TODO lab-3: Make sure the meal gets prepared by the cook, replace bridge -->
 	<!--<i:bridge id="kitchen" input-channel="products" output-channel="meals"	/>-->
 	
-	<i:aggregator
-		id="kitchen"
+	<i:aggregator	id="kitchen"
 		input-channel="products"
 		output-channel="meals"
-		ref="cook"
-		method="prepareMeal"
-		correlation-strategy="cook"
-		correlation-strategy-method="correlatingRecipeFor"
-		release-strategy="cook"/>
+		ref="cook"/>
 </beans>

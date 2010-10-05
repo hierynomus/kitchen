@@ -6,10 +6,9 @@ import nl.xebia.si.university.kitchen.domain.Meal;
 import nl.xebia.si.university.kitchen.domain.Product;
 import nl.xebia.si.university.kitchen.domain.Recipe;
 import org.springframework.integration.Message;
-import org.springframework.integration.aggregator.ReleaseStrategy;
 import org.springframework.integration.annotation.Aggregator;
 import org.springframework.integration.annotation.CorrelationStrategy;
-import org.springframework.integration.store.MessageGroup;
+import org.springframework.integration.annotation.ReleaseStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author Iwein Fuld
  */
-public class Cook implements ReleaseStrategy {
+public class Cook {
 	private final ConcurrentMap<Recipe, Meal> misEnPlace = new ConcurrentHashMap<Recipe, Meal>();
 
 	@Aggregator
@@ -48,14 +47,15 @@ public class Cook implements ReleaseStrategy {
 		return meal;
 	}
 
-	public boolean canRelease(MessageGroup group) {
-		Recipe recipe = (Recipe) group.getGroupId();
-		return recipe.isSatisfiedBy(productsFromMessages(group));
+	@ReleaseStrategy
+	public boolean canCookMeal(List<Message<?>> products) {
+		Recipe recipe = (Recipe) products.get(0).getHeaders().get("recipe");
+		return recipe.isSatisfiedBy(productsFromMessages(products));
 	}
 
-	private ArrayList<Product> productsFromMessages(MessageGroup group) {
+	private ArrayList<Product> productsFromMessages(List<Message<?>> group) {
 		return new ArrayList<Product>(
-				Collections2.transform(group.getUnmarked(), new Function<Message<?>, Product>() {
+				Collections2.transform(group, new Function<Message<?>, Product>() {
 					public Product apply(Message<?> from) {
 						return (Product) from.getPayload();
 					}
