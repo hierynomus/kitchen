@@ -7,13 +7,5 @@
            http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
        ">
 
-	<bean id="cook" class="nl.xebia.si.university.kitchen.Cook"/>
-
-	<!-- TODO lab-3: Make sure the meal gets prepared by the cook, replace bridge -->
-	<!--<i:bridge id="kitchen" input-channel="products" output-channel="meals"	/>-->
-	
-	<i:aggregator	id="kitchen"
-		input-channel="products"
-		output-channel="meals"
-		ref="cook"/>
+	<i:bridge id="kitchen" input-channel="products" output-channel="meals"	/>
 </beans>
