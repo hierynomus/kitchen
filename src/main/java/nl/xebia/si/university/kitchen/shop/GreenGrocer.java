@@ -11,15 +11,4 @@ public class GreenGrocer {
 	public Vegetable sell(Ingredient ingredient) {
 		return new Vegetable(ingredient.getName(), ingredient.getAmount());
 	}
-
-    @Transformer
-    public GroceryBag<Vegetable> sell(ShoppingList shoppingList) {
-        GroceryBag<Vegetable> groceryBag = new GroceryBag<Vegetable>();
-        for (Ingredient ingredient : shoppingList.getItems()) {
-            groceryBag.put(sell(ingredient));
-        }
-
-        return groceryBag;
-    }
-
 }
