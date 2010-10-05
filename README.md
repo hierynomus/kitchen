@@ -36,7 +36,12 @@ When aggregating is done without a previous symmetric splitting, it also becomes
 Each lab can be found in a branch or the repository:
 
 * lab-1: Deal with converting a recipe into its separate ingredients.
+    * Teaches splitting and adding a header
 * lab-2: Deal with converting the ingredients of a recipe into their physical counterparts by shopping for them.
+    * Teaches routing and transforming
 * lab-3: Deal with getting all the products back together to create a meal
+    * Teaches aggregation
 * lab-4: Reading the recipes from the recipebook/filesystem
+    * Teaches channel-adapters
 * lab-5: Try to minimize the time spent shopping by making shoppinglists and grocerybags
+    * Teaches double splitting, aggregating over a different key, and manipulating headers to accomplish this.
